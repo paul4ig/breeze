@@ -1368,27 +1368,30 @@ namespace Breeze
         {
             case ButtonClose:
             {
-                painter->drawLine( QPointF( 5, 5 ), QPointF( 13, 13 ) );
-                painter->drawLine( 13, 5, 5, 13 );
+                painter->drawLine( QPointF( 4.5, 4.5 ), QPointF( 13.5, 13.5 ) );
+                painter->drawLine( QPointF(13.5, 4.5), QPointF(4.5, 13.5) );
                 break;
             }
 
             case ButtonMaximize:
             {
-                painter->drawPolyline( QVector<QPointF>{
-                    QPointF( 4, 11 ),
-                    QPointF( 9, 6 ),
-                    QPointF( 14, 11 )});
+                //large square
+                pen.setJoinStyle( Qt::RoundJoin );
+                painter->setPen( pen );
+
+                painter->drawRect( QRectF( QPointF( 4.5, 4.5 ), QPointF( 13.5, 13.5 ) ) );
                 break;
             }
 
             case ButtonMinimize:
             {
 
-                painter->drawPolyline(QVector<QPointF>{
-                    QPointF( 4, 7 ),
-                    QPointF( 9, 12 ),
-                    QPointF( 14, 7 )} );
+                //tiny filled square
+                pen.setJoinStyle( Qt::RoundJoin );
+                painter->setBrush( pen.color() );
+                painter->setPen( pen );
+
+                painter->drawRect( QRectF( QPointF( 7.5, 7.5 ), QPointF( 10.5, 10.5 ) ) );
                 break;
             }
 
@@ -1396,11 +1399,18 @@ namespace Breeze
             {
                 pen.setJoinStyle( Qt::RoundJoin );
                 painter->setPen( pen );
-                painter->drawPolygon( QVector<QPointF>{
-                    QPointF( 4.5, 9 ),
-                    QPointF( 9, 4.5 ),
-                    QPointF( 13.5, 9 ),
-                    QPointF( 9, 13.5 )});
+        
+                //disable antialiasing to remove blur at small sizes
+                painter->setRenderHints( QPainter::Antialiasing, false );
+            
+                //overlapping windows icon
+                painter->drawRect( QRectF( QPointF( 4, 6 ), QPointF( 11, 13 ) ) );
+                painter->drawPolyline( QVector<QPointF>{
+                    QPointF( 6, 6 ),
+                    QPointF( 6, 4 ),
+                    QPointF( 13, 4 ),
+                    QPointF( 13, 11 ),
+                    QPointF( 11, 11 )} );
                 break;
             }
 

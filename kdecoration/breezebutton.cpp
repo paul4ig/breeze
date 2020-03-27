@@ -201,8 +201,8 @@ namespace Breeze
 
                 case DecorationButtonType::Close:
                 {
-                    painter->drawLine( QPointF( 5, 5 ), QPointF( 13, 13 ) );
-                    painter->drawLine( 13, 5, 5, 13 );
+                    painter->drawLine( QPointF( 4.5, 4.5 ), QPointF( 13.5, 13.5 ) );
+                    painter->drawLine( QPointF(13.5, 4.5), QPointF(4.5, 13.5) );
                     break;
                 }
 
@@ -213,27 +213,34 @@ namespace Breeze
                         pen.setJoinStyle( Qt::RoundJoin );
                         painter->setPen( pen );
 
-                        painter->drawPolygon( QVector<QPointF>{
-                            QPointF( 4, 9 ),
-                            QPointF( 9, 4 ),
-                            QPointF( 14, 9 ),
-                            QPointF( 9, 14 )} );
+                         //overlapping windows icon
+                        painter->drawRect( QRectF( QPointF( 4.5, 6.5 ), QPointF( 11.5, 13.5 ) ) );
+                        painter->drawPolyline( QVector<QPointF>{
+                            QPointF( 6.5, 6.5 ),
+                            QPointF( 6.5, 4.5 ),
+                            QPointF( 13.5, 4.5 ),
+                            QPointF( 13.5, 11.5 ),
+                            QPointF( 11.5, 11.5 )} );
 
                     } else {
-                        painter->drawPolyline( QVector<QPointF>{
-                            QPointF( 4, 11 ),
-                            QPointF( 9, 6 ),
-                            QPointF( 14, 11 )});
+                        //large square
+                        pen.setJoinStyle( Qt::RoundJoin );
+                        painter->setPen( pen );
+
+                        painter->drawRect( QRectF( QPointF( 4.5, 4.5 ), QPointF( 13.5, 13.5 ) ) );
                     }
                     break;
                 }
 
                 case DecorationButtonType::Minimize:
                 {
-                    painter->drawPolyline( QVector<QPointF>{
-                        QPointF( 4, 7 ),
-                        QPointF( 9, 12 ),
-                        QPointF( 14, 7 ) });
+                    //tiny filled square
+                    pen.setJoinStyle( Qt::RoundJoin );
+                    painter->setBrush( pen.color() );
+                    painter->setPen( pen );
+
+                    painter->drawRect( QRectF( QPointF( 7.5, 7.5 ), QPointF( 10.5, 10.5 ) ) );
+                    
                     break;
                 }
 
@@ -302,30 +309,38 @@ namespace Breeze
                 case DecorationButtonType::KeepBelow:
                 {
 
-                    painter->drawPolyline(  QVector<QPointF> {
-                        QPointF( 4, 5 ),
-                        QPointF( 9, 10 ),
-                        QPointF( 14, 5 ) });
-
-                    painter->drawPolyline(  QVector<QPointF> {
-                        QPointF( 4, 9 ),
-                        QPointF( 9, 14 ),
-                        QPointF( 14, 9 ) });
+                    //horizontal lines
+                    painter->drawLine( QPointF( 4.5, 13.5 ), QPointF( 13.5, 13.5 ) );
+                    painter->drawLine( QPointF( 9.5, 9.5 ), QPointF( 13.5, 9.5 ) );
+                    painter->drawLine( QPointF( 9.5, 5.5 ), QPointF( 13.5, 5.5 ) );
+                    
+                    //arrow
+                    painter->drawLine( QPointF( 4.5, 3.5 ), QPointF( 4.5, 11.5 ) );
+                    
+                    painter->drawPolyline( QVector<QPointF>{
+                        QPointF( 2.5, 9.5 ),
+                        QPointF( 4.5, 11.5 ),
+                        QPointF( 6.5, 9.5 )} );
+                    
                     break;
 
                 }
 
                 case DecorationButtonType::KeepAbove:
                 {
-                    painter->drawPolyline(  QVector<QPointF> {
-                        QPointF( 4, 9 ),
-                        QPointF( 9, 4 ),
-                        QPointF( 14, 9 ) });
+                    //horizontal lines
+                    painter->drawLine( QPointF( 4.5, 4.5 ), QPointF( 13.5, 4.5 ) );
+                    painter->drawLine( QPointF( 4.5, 8.5 ), QPointF( 8.5, 8.5 ) );
+                    painter->drawLine( QPointF( 4.5, 12.5 ), QPointF( 8.5, 12.5 ) );
 
-                    painter->drawPolyline(  QVector<QPointF> {
-                        QPointF( 4, 13 ),
-                        QPointF( 9, 8 ),
-                        QPointF( 14, 13 ) });
+                    //arrow
+                    painter->drawLine( QPointF( 13.5, 6.5 ), QPointF( 13.5, 14.5 ) );
+
+                    painter->drawPolyline( QVector<QPointF>{
+                        QPointF( 11.5, 8.5 ),
+                        QPointF( 13.5, 6.5 ),
+                        QPointF( 15.5, 8.5 )} );
+                    
                     break;
                 }
 
